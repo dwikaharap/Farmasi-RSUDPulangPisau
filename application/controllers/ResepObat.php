@@ -48,4 +48,76 @@ class ResepObat extends CI_Controller
 		//output to json format
 		echo json_encode($output);
 	}
+
+
+	public function ajax_edit($id)
+	{
+		$data = $this->resep_obat->get_by_id($id);
+		echo json_encode($data);
+	}
+
+	public function ajax_update()
+	{
+		$this->_validate();
+		$data = array(
+				'no_resep' => $this->input->post('no_resep'),
+				'no_rkm_medis' => $this->input->post('no_rkm_medis'),
+				'nm_pasien' => $this->input->post('nm_pasien'),
+				'nm_dokter' => $this->input->post('nm_dokter'),
+				'nm_poli' => $this->input->post('nm_poli'),
+			);
+		$this->resep_obat->update(array('no_resep' => $this->input->post('no_resep')), $data);
+		echo json_encode(array("status" => TRUE));
+	}
+
+	private function _validate()
+	{
+		$data = array();
+		$data['error_string'] = array();
+		$data['inputerror'] = array();
+		$data['status'] = TRUE;
+
+		if($this->input->post('no_resep') == '')
+		{
+			$data['inputerror'][] = 'no_resep';
+			$data['error_string'][] = 'First name is required';
+			$data['status'] = FALSE;
+		}
+
+		if($this->input->post('no_rkm_medis') == '')
+		{
+			$data['inputerror'][] = 'no_rkm_medis';
+			$data['error_string'][] = 'Last name is required';
+			$data['status'] = FALSE;
+		}
+
+		if($this->input->post('nm_poli') == '')
+		{
+			$data['inputerror'][] = 'nm_poli';
+			$data['error_string'][] = 'Date of Birth is required';
+			$data['status'] = FALSE;
+		}
+
+		if($this->input->post('nm_pasien') == '')
+		{
+			$data['inputerror'][] = 'nm_pasien';
+			$data['error_string'][] = 'Please select nm_pasien';
+			$data['status'] = FALSE;
+		}
+
+		if($this->input->post('nm_dokter') == '')
+		{
+			$data['inputerror'][] = 'nm_dokter';
+			$data['error_string'][] = 'Addess is required';
+			$data['status'] = FALSE;
+		}
+
+		if($data['status'] === FALSE)
+		{
+			echo json_encode($data);
+			exit();
+		}
+	}
+
+
 }

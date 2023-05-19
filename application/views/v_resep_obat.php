@@ -135,12 +135,11 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">No Resep:</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Nam Pasien:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <label class="control-label col-md-3">Nama Pasien</label>
+                            <div class="col-md-12">
+                                <input name="nm_pasien" placeholder="Nama Pasien" class="form-control" type="text" readonly>
+                                <span class="help-block"></span>
+                            </div>
                         </div>
                     </form>
                 </div>

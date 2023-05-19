@@ -65,4 +65,38 @@
     });
 
 
+    function detail_resep(id) {
+            save_method = 'update';
+            $('#form')[0].reset(); // reset form on modals
+            $('.form-group').removeClass('has-error'); // clear error class
+            $('.help-block').empty(); // clear error string
+
+            //Ajax Load data from ajax
+            $.ajax({
+                url: "<?php echo site_url('ResepObat/ajax_edit/') ?>/" + id,
+                type: "GET",
+                dataType: "JSON",
+                success: function(data) {
+
+                    $('[name="no_resep"]').val(data.id);
+                    $('[name="no_rkm_medis"]').val(data.no_rkm_medis);
+                    $('[name="nm_pasien"]').val(data.nm_pasien);
+                    $('[name="nm_dokter"]').val(data.nm_dokter);
+                    $('[name="nm_poli"]').val(data.nm_poli);
+                    $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+                    $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error get data from ajax');
+                }
+            });
+        }
+
+        function reload_table() {
+            table.ajax.reload(null, false); //reload datatable ajax 
+        }
+
+
+
 </script>
