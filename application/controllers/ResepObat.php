@@ -38,7 +38,7 @@ class ResepObat extends CI_Controller
 
 			$data[] = $row;
 		}
-
+ 
 		$output = array(
 			"draw" => $_POST['draw'],
 			"recordsTotal" => $this->resep_obat->count_all_resep_obat(),
